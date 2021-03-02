@@ -3,19 +3,24 @@ import logo from './logo.svg';
 import './App.css';
 import ReactDOM from 'react-dom';
 import calculateRevenue from './CalculateRevenue';
+import calculateExpense from './CalculateExpense';
+import calculateGPM from './CalculateGrossProfitMargin';
+import calculateNPM from './CalculateNetProfitMargin';
+import calculateWCR from './CalculateWorkingCapitalRatio';
 import reactDom from 'react-dom';
 
+
 function App() {
-  var revenueTotal = 0;
-  var expenseTotal = 0;
-  var salesTotal = 0;
-  var grossProfitMargin = 0;
-  var netProfitMargin = 0;
-  var assetTotal = 0;
-  var assetSubtraction = 0;
-  var liabilityTotal = 0;
-  var liabilityTotalSubtraction = 0;
-  var workingCapitalRatio = 0;
+  let revenueTotal = 0;
+  let expenseTotal = 0;
+  let salesTotal = 0;
+  let grossProfitMargin = 0;
+  let netProfitMargin = 0;
+  let assetTotal = 0;
+  let assetSubtraction = 0;
+  let liabilityTotal = 0;
+  let liabilityTotalSubtraction = 0;
+  let workingCapitalRatio = 0;
 
   const [data,setData] = useState([]);
   const fetchData=()=>{
@@ -35,10 +40,10 @@ function App() {
         setData(jsonData);
         Array.from(jsonData.data).filter(data => {
           if (data.account_category === 'revenue')
-            revenueTotal += data.total_value;
+            revenueTotal = calculateRevenue(revenueTotal, data.total_value);
           else if (data.account_category === 'expense')
-            expenseTotal += data.total_value;
-            else if (data.account_type === 'sales' && data.value_type === 'debit')
+            expenseTotal = calculateExpense(expenseTotal, data.total_value);
+          else if (data.account_type === 'sales' && data.value_type === 'debit')
             salesTotal += data.total_value;
           else if (data.account_category === 'assets' && data.value_type === 'debit'){
             if (data.account_type === 'current' || data.account_type === 'bank' || data.account_type === 'current_accounts_receivable')
@@ -59,28 +64,27 @@ function App() {
         })
         console.log(revenueTotal);
         console.log(expenseTotal);
-        grossProfitMargin = (salesTotal / revenueTotal) * 100;
-        console.log(salesTotal);
+        grossProfitMargin = calculateGPM(salesTotal, revenueTotal);
+        //console.log(salesTotal);
         console.log(grossProfitMargin);
-        netProfitMargin = ((expenseTotal - revenueTotal)/ revenueTotal) * 100;
+        netProfitMargin = calculateNPM(expenseTotal, revenueTotal);
         console.log(netProfitMargin);
         // console.log(assetSubtraction);
         // console.log(assetTotal);
-        assetTotal = assetTotal - assetSubtraction;
-        console.log(assetTotal);
+        //assetTotal = assetTotal - assetSubtraction;
+        //console.log(assetTotal);
+        workingCapitalRatio = calculateWCR(assetTotal, assetSubtraction, liabilityTotal,liabilityTotalSubtraction);
         // console.log(liabilityTotalSubtraction);
         // console.log(liabilityTotal);
-        liabilityTotal = liabilityTotal - liabilityTotalSubtraction;
-        console.log(liabilityTotal);
-        workingCapitalRatio = (assetTotal/liabilityTotal)*100;
+        //liabilityTotal = liabilityTotal - liabilityTotalSubtraction;
+        //console.log(liabilityTotal);
+        //workingCapitalRatio = (assetTotal/liabilityTotal)*100;
         console.log(workingCapitalRatio);
         revenueTotal = Math.trunc(revenueTotal);
         expenseTotal = Math.trunc(expenseTotal);
-        revenueTotal = revenueTotal.toLocaleString();
         expenseTotal = expenseTotal.toLocaleString();
-        grossProfitMargin = grossProfitMargin.toLocaleString(undefined, {maximumFractionDigits:1});
-        netProfitMargin = netProfitMargin.toLocaleString(undefined, {maximumFractionDigits:1});
-        workingCapitalRatio = workingCapitalRatio.toLocaleString(undefined, {maximumFractionDigits:1});
+        revenueTotal = revenueTotal.toLocaleString();
+        //workingCapitalRatio = workingCapitalRatio.toLocaleString(undefined, {maximumFractionDigits:1});
         const element = <div>
           <h1>9Spokes Coding Challenge:</h1>
           <p>Revenue: ${revenueTotal}</p>
@@ -92,9 +96,6 @@ function App() {
         ReactDOM.render(
           element,
           document.getElementById('App'));
-        // var heml = document.getElementsByClassName("App");
-        // heml.innerHTML += revenueTotal;
-        //console.log(jsonData)
         
     });
     
@@ -111,24 +112,3 @@ function App() {
 }
 
 export default App;
-
-
-// const sumReducer = (sum, value) => (
-//   sum + value
-// );
-
-// export calculateRevenue = (data) => {
-//   const revenue = data
-//      .filter(record => record.account_category === 'revenue')
-//      .reduce(sumReducer, 0);
-
-//   return revenue;
-// };
-
-// export calculateExpenses = (data) => {
-//   const expenses = data
-//      .filter(record => record.account_category === 'expense')
-//      .reduce(sumReducer, 0);
-
-//   return expenses;
-// };
