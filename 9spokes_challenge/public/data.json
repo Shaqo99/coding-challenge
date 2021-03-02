@@ -329,6 +329,8 @@
             "account_status": "ACTIVE",
             "account_type_bank": ""
         }
+
+        
     ],
     "currency": "AUD",
     "object_origin_type": "accounting",
