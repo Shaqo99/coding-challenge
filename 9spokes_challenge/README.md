@@ -18,6 +18,6 @@ and working capital ratio. Unit tests were run using the [Jest](https://jestjs.i
 ![Output for challenge](public/output.PNG)
 
 
-*Gross profit margin is $0 as there were no entries that matched the conditions for it.
+*Gross profit margin is $0 as there were no entries that matched the conditions for it (in the given JSON file).
 
 
