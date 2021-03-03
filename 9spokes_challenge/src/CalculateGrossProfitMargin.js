@@ -5,3 +5,6 @@ function calculateGPM(salesTotal, revenueTotal){
 }
 
 export default calculateGPM;
+
+
+
