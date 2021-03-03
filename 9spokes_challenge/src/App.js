@@ -79,6 +79,7 @@ function App() {
         //liabilityTotal = liabilityTotal - liabilityTotalSubtraction;
         //console.log(liabilityTotal);
         //workingCapitalRatio = (assetTotal/liabilityTotal)*100;
+        
         console.log(workingCapitalRatio);
         revenueTotal = Math.trunc(revenueTotal);
         expenseTotal = Math.trunc(expenseTotal);
