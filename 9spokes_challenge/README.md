@@ -10,12 +10,12 @@ and working capital ratio. Unit tests were run using the [https://jestjs.io/](Je
 
 ### Output of Unit Tests
 
-![Output of Unit Tests](public\unitTests.PNG)
+![Output of Unit Tests](C:\Users\shaqu\Desktop\9Spokes challenge\coding-challenge\9spokes_challenge\public\unitTests.PNG)
 
 
 ## Output
 
-![Output for challenge](public\output.PNG)
+![Output for challenge](C:\Users\shaqu\Desktop\9Spokes challenge\coding-challenge\9spokes_challenge\public\output.PNG)
 
 
 *Gross profit margin is $0 as there were no entries that matched the conditions for it.
