@@ -1,3 +1,5 @@
+//Unit test for revenue equation
+
 const calculateRevenue = require('./CalculateRevenue').default;
 
 test('Revenue calculation is run correctly', () => {

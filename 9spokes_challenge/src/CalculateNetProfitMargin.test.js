@@ -1,3 +1,5 @@
+//Unit test for net profit margin equation
+
 const calculateNPM = require('./CalculateNetProfitMargin').default;
 
 test('Net Profit Margin calculation is run correctly', () => {

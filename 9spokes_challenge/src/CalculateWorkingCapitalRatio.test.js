@@ -1,3 +1,5 @@
+//Unit test for working capital ratio equation
+
 const calculateWCR = require('./CalculateWorkingCapitalRatio').default;
 
 test('Working capital ratio calculation is run correctly', () => {

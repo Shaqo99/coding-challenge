@@ -1,3 +1,5 @@
+//Unit test for expense equation
+
 const calculateExpense = require('./CalculateExpense').default;
 
 test('Expense calculation is run correctly', () => {

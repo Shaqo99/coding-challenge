@@ -1,5 +1,7 @@
+/*Read json file and display revenue, expense, gross profit margin, 
+net profit margin and working capital ratio on screen */
+
 import React, {useEffect, useState} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import ReactDOM from 'react-dom';
 import calculateRevenue from './CalculateRevenue';
@@ -7,10 +9,10 @@ import calculateExpense from './CalculateExpense';
 import calculateGPM from './CalculateGrossProfitMargin';
 import calculateNPM from './CalculateNetProfitMargin';
 import calculateWCR from './CalculateWorkingCapitalRatio';
-import reactDom from 'react-dom';
 
 
 function App() {
+  /*declarations */
   let revenueTotal = 0;
   let expenseTotal = 0;
   let salesTotal = 0;
@@ -22,10 +24,13 @@ function App() {
   let liabilityTotalSubtraction = 0;
   let workingCapitalRatio = 0;
 
+  //read and set data
   const [data,setData] = useState([]);
+  //fetch data from data.json
   const fetchData=()=>{
     fetch('data.json'
     ,{
+        //access and accept 
         headers : {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
@@ -35,10 +40,13 @@ function App() {
         console.log(res)
         return res.json();
     })
+    //load data into jsonData
     .then(function(jsonData) { 
         console.log(jsonData);
         setData(jsonData);
+        //filter each element
         Array.from(jsonData.data).filter(data => {
+          
           if (data.account_category === 'revenue')
             revenueTotal = calculateRevenue(revenueTotal, data.total_value);
           else if (data.account_category === 'expense')
@@ -65,27 +73,20 @@ function App() {
         console.log(revenueTotal);
         console.log(expenseTotal);
         grossProfitMargin = calculateGPM(salesTotal, revenueTotal);
-        //console.log(salesTotal);
+        
         console.log(grossProfitMargin);
         netProfitMargin = calculateNPM(expenseTotal, revenueTotal);
         console.log(netProfitMargin);
-        // console.log(assetSubtraction);
-        // console.log(assetTotal);
-        //assetTotal = assetTotal - assetSubtraction;
-        //console.log(assetTotal);
+        
         workingCapitalRatio = calculateWCR(assetTotal, assetSubtraction, liabilityTotal,liabilityTotalSubtraction);
-        // console.log(liabilityTotalSubtraction);
-        // console.log(liabilityTotal);
-        //liabilityTotal = liabilityTotal - liabilityTotalSubtraction;
-        //console.log(liabilityTotal);
-        //workingCapitalRatio = (assetTotal/liabilityTotal)*100;
         
         console.log(workingCapitalRatio);
         revenueTotal = Math.trunc(revenueTotal);
         expenseTotal = Math.trunc(expenseTotal);
         expenseTotal = expenseTotal.toLocaleString();
         revenueTotal = revenueTotal.toLocaleString();
-        //workingCapitalRatio = workingCapitalRatio.toLocaleString(undefined, {maximumFractionDigits:1});
+       
+        //render elements
         const element = <div>
           <h1>9Spokes Coding Challenge:</h1>
           <p>Revenue: ${revenueTotal}</p>

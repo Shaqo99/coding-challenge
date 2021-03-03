@@ -1,3 +1,5 @@
+//Unit test for gross profit margin equation
+
 const calculateGPM = require('./CalculateGrossProfitMargin').default;
 
 test('Gross Profit Margin calculation is run correctly', () => {
